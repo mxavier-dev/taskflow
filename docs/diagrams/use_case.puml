@@ -1,0 +1,40 @@
+@startuml
+!define RECTANGLE class
+
+left to right direction
+
+actor "Usuário" as User
+
+package "TaskFlow" {
+    usecase "Criar tarefa" as UC1
+    usecase "Listar tarefas" as UC2
+    usecase "Consultar tarefa" as UC3
+    usecase "Editar tarefa" as UC4
+    usecase "Excluir tarefa" as UC5
+    usecase "Alterar status" as UC6
+    usecase "Definir prioridade" as UC7
+}
+
+User --> UC1
+User --> UC2
+User --> UC3
+User --> UC4
+User --> UC5
+User --> UC6
+User --> UC7
+
+note right of UC1
+  Título, descrição e prioridade
+  Validação no backend
+end note
+
+note right of UC6
+  Estados: Pendente, Em andamento, Concluída
+end note
+
+note right of UC7
+  Prioridades: Baixa, Média, Alta
+  Adicionado via mudança de escopo
+end note
+
+@enduml

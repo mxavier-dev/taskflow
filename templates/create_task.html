@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Task - TaskFlow{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Create New Task</h1>
+    <a href="{{ url_for('tasks.list_tasks') }}" class="btn btn-secondary">Back to List</a>
+</div>
+
+<form action="{{ url_for('tasks.create_task_route') }}" method="POST" class="task-form">
+    <div class="form-group">
+        <label for="title">Title <span class="required">*</span></label>
+        <input type="text" id="title" name="title" required maxlength="200">
+    </div>
+
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" name="description" rows="5" maxlength="1000"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="priority">Priority</label>
+        <select id="priority" name="priority">
+            {% for p in priorities %}
+            <option value="{{ p }}" {% if p == 'Medium' %}selected{% endif %}>{{ p }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Create Task</button>
+        <a href="{{ url_for('tasks.list_tasks') }}" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+{% endblock %}

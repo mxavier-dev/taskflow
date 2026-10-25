@@ -1,0 +1,76 @@
+@startuml
+!define TABLE class
+
+skinparam classAttributeIconSize 0
+
+package "src" {
+    class FlaskApp {
+        +create_app(): Flask
+    }
+
+    class Database {
+        +get_db_path(): str
+        +get_db_connection(): ContextManager
+        +init_db(): void
+        +add_priority_column(): void
+        +create_task(title, description, status, priority): int
+        +get_all_tasks(): list[dict]
+        +get_task_by_id(id): dict | None
+        +update_task(id, title, description, status, priority): bool
+        +delete_task(id): bool
+        +update_task_status(id, status): bool
+    }
+
+    class Routes {
+        +list_tasks(): Response
+        +create_task_route(): Response
+        +view_task(id): Response
+        +edit_task(id): Response
+        +delete_task_route(id): Response
+        +change_status(id): Response
+    }
+}
+
+package "database" {
+    TABLE tasks {
+        +id: INTEGER PK
+        +title: TEXT NOT NULL
+        +description: TEXT
+        +status: TEXT DEFAULT 'Pending'
+        +priority: TEXT DEFAULT 'Medium'
+        +created_at: DATETIME
+    }
+}
+
+package "templates" {
+    class BaseTemplate
+    class TasksTemplate
+    class CreateTaskTemplate
+    class EditTaskTemplate
+    class ViewTaskTemplate
+}
+
+FlaskApp --> Database : uses
+FlaskApp --> Routes : registers blueprint
+Routes --> Database : uses
+Routes --> BaseTemplate : renders
+TasksTemplate --|> BaseTemplate
+CreateTaskTemplate --|> BaseTemplate
+EditTaskTemplate --|> BaseTemplate
+ViewTaskTemplate --|> BaseTemplate
+
+Database --> tasks : persists
+
+note right of Database
+  SQLite com sqlite3 (stdlib)
+  Connection pooling via context manager
+  Parâmetros SQL (?) para prevenir injection
+end note
+
+note right of Routes
+  Blueprint 'tasks'
+  Validação backend para todos inputs
+  Flash messages para feedback
+end note
+
+@enduml
