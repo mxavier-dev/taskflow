@@ -112,3 +112,18 @@ def update_task_status(task_id: int, status: str) -> bool:
         cursor.execute('UPDATE tasks SET status = ? WHERE id = ?', (status, task_id))
         conn.commit()
         return cursor.rowcount > 0
+
+
+# Validation constants
+VALID_STATUSES = ['Pending', 'In Progress', 'Completed']
+VALID_PRIORITIES = ['Low', 'Medium', 'High']
+
+
+def is_valid_status(status: str) -> bool:
+    """Check if status is valid."""
+    return status in VALID_STATUSES
+
+
+def is_valid_priority(priority: str) -> bool:
+    """Check if priority is valid."""
+    return priority in VALID_PRIORITIES

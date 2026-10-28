@@ -9,11 +9,11 @@ from src.database import (
     get_task_by_id,
     update_task,
     update_task_status,
+    is_valid_status,
+    is_valid_priority,
+    VALID_STATUSES,
+    VALID_PRIORITIES,
 )
-
-# Valid status and priority values
-VALID_STATUSES = ['Pending', 'In Progress', 'Completed']
-VALID_PRIORITIES = ['Low', 'Medium', 'High']
 
 bp = Blueprint('tasks', __name__)
 
@@ -46,7 +46,7 @@ def create_task_route():
         flash('Title is required.', 'error')
         return render_template('create_task.html', priorities=VALID_PRIORITIES), 400
 
-    if priority not in VALID_PRIORITIES:
+    if not is_valid_priority(priority):
         flash('Invalid priority.', 'error')
         return render_template('create_task.html', priorities=VALID_PRIORITIES), 400
 
@@ -84,11 +84,11 @@ def edit_task(task_id: int):
         flash('Title is required.', 'error')
         return render_template('edit_task.html', task=task, statuses=VALID_STATUSES, priorities=VALID_PRIORITIES), 400
 
-    if status not in VALID_STATUSES:
+    if not is_valid_status(status):
         flash('Invalid status.', 'error')
         return render_template('edit_task.html', task=task, statuses=VALID_STATUSES, priorities=VALID_PRIORITIES), 400
 
-    if priority not in VALID_PRIORITIES:
+    if not is_valid_priority(priority):
         flash('Invalid priority.', 'error')
         return render_template('edit_task.html', task=task, statuses=VALID_STATUSES, priorities=VALID_PRIORITIES), 400
 
@@ -123,7 +123,7 @@ def change_status(task_id: int):
         abort(404, description="Task not found")
 
     status = request.form.get('status', 'Pending')
-    if status not in VALID_STATUSES:
+    if not is_valid_status(status):
         flash('Invalid status.', 'error')
         return redirect(url_for('tasks.list_tasks'))
 
