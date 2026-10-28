@@ -3,16 +3,16 @@
 from flask import Blueprint, abort, flash, redirect, render_template, request, url_for
 
 from src.database import (
+    VALID_PRIORITIES,
+    VALID_STATUSES,
     create_task,
     delete_task,
     get_all_tasks,
     get_task_by_id,
+    is_valid_priority,
+    is_valid_status,
     update_task,
     update_task_status,
-    is_valid_status,
-    is_valid_priority,
-    VALID_STATUSES,
-    VALID_PRIORITIES,
 )
 
 bp = Blueprint('tasks', __name__)
