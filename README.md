@@ -200,6 +200,19 @@ The academic report (PDF/DOCX) is in `docs/report/` and covers:
 
 This project is for academic purposes only.
 
+## Test Results
+
+All tests passing (25/25):
+
+- Task Creation: 4 tests
+- Task Listing: 2 tests
+- Task Viewing: 2 tests
+- Task Editing: 5 tests
+- Task Deletion: 2 tests
+- Task Status Change: 3 tests
+- Priority Persistence: 3 tests
+- Database Operations: 4 tests
+
 ## Author
 
 Matheus Xavier - Software Engineering Student
