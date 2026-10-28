@@ -18,10 +18,10 @@ TaskFlow - A web-based task management system for academic Software Engineering 
 | CRUD completo funciona | ✅ Concluído e verificado | All 25 tests pass |
 | Estados são validados | ✅ Concluído e verificado | Backend validation for status/priority |
 | Prioridade Low/Medium/High funciona | ✅ Concluído e verificado | Priority field implemented and tested |
-| Testes automatizados passam | ✅ Concluído e verificado | 25/25 tests passing |
+| Testes automatizados passam | ✅ Concluído e verificado | 27/27 tests passing |
 | GitHub Actions executa os testes | ⏳ Pendente | Workflow file created, needs push to GitHub |
 | Kanban tem 10+ cartões e 3 colunas | ⏳ Pendente | Requires GitHub Projects setup |
-| 10+ commits reais e significativos | 🔄 Em andamento | Commits will be made |
+| 10+ commits reais e significativos | 🔄 Em andamento | 7 commits so far (need 3 more) |
 | Mudança de escopo documentada | ✅ Concluído e verificado | README documents priority change |
 | README permite instalar e executar | ✅ Concluído e verificado | Complete README.md created |
 | UML corresponde à solução | ⏳ Pendente | Diagrams to be created |
@@ -153,7 +153,7 @@ TaskFlow - A web-based task management system for academic Software Engineering 
 ============================= test session starts ==============================
 platform linux -- Python 3.10.12, pytest-9.2.0, pluggy-1.7.0
 rootdir: /media/matheus/Kingston/Programação/taskflow
-collected 25 items
+collected 27 items
 
 tests/test_tasks.py::TestTaskCreation::test_create_valid_task PASSED
 tests/test_tasks.py::TestTaskCreation::test_create_task_without_title_fails PASSED
@@ -180,8 +180,10 @@ tests/test_tasks.py::TestDatabaseOperations::test_create_and_retrieve_task PASSE
 tests/test_tasks.py::TestDatabaseOperations::test_update_task PASSED
 tests/test_tasks.py::TestDatabaseOperations::test_delete_task PASSED
 tests/test_tasks.py::TestDatabaseOperations::test_update_status PASSED
+tests/test_tasks.py::TestValidationFunctions::test_is_valid_status PASSED
+tests/test_tasks.py::TestValidationFunctions::test_is_valid_priority PASSED
 
-============================== 25 passed in 0.45s ==============================
+============================== 27 passed in 0.45s ==============================
 ```
 
 ---
