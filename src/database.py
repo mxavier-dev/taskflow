@@ -42,6 +42,10 @@ def init_db() -> None:
         ''')
         conn.commit()
 
+    # Run migrations for existing databases
+    add_priority_column()
+    migrate_status_values()
+
 
 def add_priority_column() -> None:
     """Add priority column to existing tasks table if it doesn't exist."""
@@ -53,6 +57,19 @@ def add_priority_column() -> None:
         except sqlite3.OperationalError:
             # Column already exists
             pass
+
+
+def migrate_status_values() -> None:
+    """Migrate legacy status values from Portuguese to English."""
+    with get_db_connection() as conn:
+        cursor = conn.cursor()
+        # Update existing 'Pendente' to 'Pending'
+        cursor.execute("UPDATE tasks SET status = 'Pending' WHERE status = 'Pendente'")
+        # Update existing 'Em andamento' to 'In Progress'
+        cursor.execute("UPDATE tasks SET status = 'In Progress' WHERE status = 'Em andamento'")
+        # Update existing 'Concluída' to 'Completed'
+        cursor.execute("UPDATE tasks SET status = 'Completed' WHERE status = 'Concluída'")
+        conn.commit()
 
 
 def create_task(title: str, description: str, status: str = 'Pending', priority: str = 'Medium') -> int:
