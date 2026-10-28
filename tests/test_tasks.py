@@ -290,3 +290,25 @@ class TestDatabaseOperations:
 
             task = get_task_by_id(task_id)
             assert task['status'] == 'In Progress'
+
+
+class TestValidationFunctions:
+    """Tests for validation functions."""
+
+    def test_is_valid_status(self):
+        """Test status validation function."""
+        from src.database import is_valid_status
+        assert is_valid_status('Pending') is True
+        assert is_valid_status('In Progress') is True
+        assert is_valid_status('Completed') is True
+        assert is_valid_status('Invalid') is False
+        assert is_valid_status('') is False
+
+    def test_is_valid_priority(self):
+        """Test priority validation function."""
+        from src.database import is_valid_priority
+        assert is_valid_priority('Low') is True
+        assert is_valid_priority('Medium') is True
+        assert is_valid_priority('High') is True
+        assert is_valid_priority('Invalid') is False
+        assert is_valid_priority('') is False
