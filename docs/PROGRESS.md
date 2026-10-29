@@ -21,7 +21,7 @@ TaskFlow - A web-based task management system for academic Software Engineering 
 | Testes automatizados passam | ✅ Concluído e verificado | 27/27 tests passing |
 | GitHub Actions executa os testes | ⏳ Pendente | Workflow file created, needs push to GitHub |
 | Kanban tem 10+ cartões e 3 colunas | ⏳ Pendente | Requires GitHub Projects setup |
-| 10+ commits reais e significativos | 🔄 Em andamento | 7 commits so far (need 3 more) |
+| 10+ commits reais e significativos | ✅ Concluído e verificado | 10 commits (including initial) |
 | Mudança de escopo documentada | ✅ Concluído e verificado | README documents priority change |
 | README permite instalar e executar | ✅ Concluído e verificado | Complete README.md created |
 | UML corresponde à solução | ⏳ Pendente | Diagrams to be created |
@@ -57,7 +57,7 @@ TaskFlow - A web-based task management system for academic Software Engineering 
 
 ### Etapa 4 - Testes ✅
 - Configured Pytest with fixtures in `tests/conftest.py`
-- Created 25 comprehensive test cases in `tests/test_tasks.py`:
+- Created 27 comprehensive test cases in `tests/test_tasks.py`:
   - Task creation (valid, invalid title, invalid priority, default priority)
   - Task listing (empty, with data)
   - Task viewing (existing, non-existent 404)
@@ -66,8 +66,15 @@ TaskFlow - A web-based task management system for academic Software Engineering 
   - Status changes (valid, invalid, 404)
   - Priority persistence (creation, edit, display)
   - Direct database operations
-- All 25 tests passing
+  - Validation functions (status, priority)
+- All 27 tests passing
 - Linting with Ruff: clean (0 issues)
+
+### Etapa 5 - Integração Contínua ✅ (code ready)
+- Created GitHub Actions workflow (`.github/workflows/tests.yml`)
+- Runs on push and pull_request to main
+- Installs dependencies, runs tests, runs Ruff linting
+- Ready to verify on GitHub after push
 
 ---
 
