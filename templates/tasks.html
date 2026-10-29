@@ -5,7 +5,10 @@
 {% block content %}
 <div class="page-header">
     <h1>Tasks</h1>
-    <a href="{{ url_for('tasks.create_task_route') }}" class="btn btn-primary">New Task</a>
+    <div class="header-actions">
+        <span class="task-count">{{ tasks|length }} task{{ 's' if tasks|length != 1 else '' }}</span>
+        <a href="{{ url_for('tasks.create_task_route') }}" class="btn btn-primary">New Task</a>
+    </div>
 </div>
 
 {% if tasks %}

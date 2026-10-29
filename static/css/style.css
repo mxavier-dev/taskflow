@@ -75,6 +75,18 @@ body {
     color: #2c3e50;
 }
 
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.task-count {
+    color: #6c757d;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
 .flash-messages {
     margin-bottom: 1rem;
 }
