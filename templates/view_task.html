@@ -34,7 +34,7 @@
 
 <div class="task-actions">
     <a href="{{ url_for('tasks.edit_task', task_id=task.id) }}" class="btn btn-primary">Edit</a>
-    <form action="{{ url_for('tasks.change_status', task_id=task.id) }}" method="POST" style="display: inline;">
+    <form action="{{ url_for('tasks.change_status', task_id=task.id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Change task status?');">
         <select name="status" onchange="this.form.submit()">
             {% for s in ['Pending', 'In Progress', 'Completed'] %}
             <option value="{{ s }}" {% if s == task.status %}selected{% endif %}>{{ s }}</option>
