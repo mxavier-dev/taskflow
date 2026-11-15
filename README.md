@@ -1,218 +1,255 @@
-# TaskFlow
+# 🚀 TaskFlow
 
-A web-based task management system developed using agile methodologies for an academic Software Engineering project.
+A lightweight task management web application developed with Python and Flask as part of an academic Software Engineering project. The project focuses on agile development practices, software quality, automated testing, and continuous integration.
 
-## Project Description
+## 📌 Overview
 
-TaskFlow is a simple web application for managing tasks with full CRUD operations (Create, Read, Update, Delete). It was built as part of the "Building an Agile Project on GitHub: From Management to Quality Control" academic assignment.
+TaskFlow is a web-based application that allows users to manage tasks through complete CRUD operations (Create, Read, Update, and Delete).
 
-## Academic Objective
+The application uses SQLite for data persistence and Flask to handle application logic and HTTP requests. Its development follows an agile workflow supported by GitHub Projects, automated testing, and GitHub Actions.
 
-This project demonstrates:
-- Agile methodology (Kanban) applied to software development
-- Software modeling with UML diagrams
-- Automated testing with Pytest
-- Continuous Integration with GitHub Actions
-- Scope change management
-- Version control with meaningful commits
+This project was developed for the academic assignment **"Building an Agile Project on GitHub: From Management to Quality Control."**
 
-## Features
+## ✨ Features
 
-- **Create tasks** with title, description, and priority (Low/Medium/High)
-- **List all tasks** with status and priority indicators
-- **View task details** with full information
-- **Edit tasks** including title, description, status, and priority
-- **Delete tasks** with confirmation
-- **Change task status** (Pending → In Progress → Completed)
-- **Backend validation** for all inputs
-- **SQLite persistence** with automatic database initialization
-- **Priority field** (added as scope change simulation)
+- 📝 **Task creation:** Create tasks with a title, description, and priority.
+- 📋 **Task listing:** View all registered tasks, including their current status and priority.
+- 🔎 **Task details:** Access complete information about an individual task.
+- ✏️ **Task editing:** Update task information, status, and priority.
+- 🗑️ **Task deletion:** Remove tasks with confirmation.
+- 🔄 **Status management:** Track tasks through three statuses: Pending, In Progress, and Completed.
+- 🛡️ **Input validation:** Validate user input on the backend.
+- 💾 **Data persistence:** Store task information using SQLite.
+- 🎯 **Priority management:** Classify tasks as Low, Medium, or High.
 
-## Technologies
+## 🛠️ Technologies
 
-| Layer | Technology |
-|-------|------------|
-| Language | Python 3.11+ |
-| Backend | Flask 3.x |
-| Database | SQLite (built-in) |
-| Frontend | HTML5 + CSS3 (minimal) |
-| Testing | Pytest |
-| CI/CD | GitHub Actions |
-| Linting | Ruff |
-| Version Control | Git + GitHub |
+| Component | Technology |
+|---|---|
+| 🐍 Programming Language | Python 3.11+ |
+| ⚙️ Backend Framework | Flask 3.x |
+| 🗄️ Database | SQLite |
+| 🎨 Frontend | HTML5 and CSS3 |
+| 🧪 Automated Testing | Pytest |
+| 🔁 Continuous Integration | GitHub Actions |
+| 🔍 Code Quality | Ruff |
+| 🌐 Version Control | Git and GitHub |
 
-## Project Structure
+## 📁 Project Structure
 
-```
+```text
 taskflow/
-├── run.py                    # Application entry point
-├── requirements.txt          # Python dependencies
-├── README.md                 # This file
-├── .gitignore               # Git ignore rules
+├── run.py
+├── requirements.txt
+├── README.md
+├── .gitignore
 ├── src/
 │   ├── __init__.py
-│   ├── app.py               # Flask application factory
-│   ├── database.py          # Database operations
-│   └── routes.py            # Route handlers
+│   ├── app.py
+│   ├── database.py
+│   └── routes.py
 ├── templates/
-│   ├── base.html            # Base template
-│   ├── tasks.html           # Task list
-│   ├── create_task.html     # Create task form
-│   ├── edit_task.html       # Edit task form
-│   └── view_task.html       # Task detail view
+│   ├── base.html
+│   ├── tasks.html
+│   ├── create_task.html
+│   ├── edit_task.html
+│   └── view_task.html
 ├── static/
 │   └── css/
-│       └── style.css        # Styling
+│       └── style.css
 ├── tests/
-│   ├── conftest.py          # Pytest fixtures
-│   └── test_tasks.py        # Test cases
+│   ├── conftest.py
+│   └── test_tasks.py
 ├── docs/
-│   ├── PROGRESS.md          # Progress tracking
-│   ├── diagrams/            # UML diagrams
-│   ├── screenshots/         # Evidence screenshots
-│   └── report/              # Theoretical document
+│   ├── PROGRESS.md
+│   ├── diagrams/
+│   ├── screenshots/
+│   └── report/
 └── .github/
     └── workflows/
-        └── tests.yml        # CI workflow
+        └── tests.yml
 ```
 
-## Prerequisites
+## ⚡ Getting Started
+
+### 📋 Prerequisites
+
+Make sure the following tools are installed:
 
 - Python 3.11 or higher
-- pip (Python package manager)
+- pip
 - Git
 
-## Installation
+### 📥 Installation
 
 1. Clone the repository:
+
    ```bash
-   git clone https://github.com/yourusername/taskflow.git
+   git clone https://github.com/mxavier-dev/taskflow.git
    cd taskflow
    ```
 
-2. Create and activate a virtual environment:
+2. Create a virtual environment:
+
    ```bash
-   python3 -m venv .venv
-   source .venv/bin/activate  # Linux/macOS
-   # .venv\Scripts\activate   # Windows
+   python -m venv .venv
    ```
 
-3. Install dependencies:
+3. Activate the virtual environment:
+
+   **Linux/macOS**
+   ```bash
+   source .venv/bin/activate
+   ```
+
+   **Windows**
+   ```powershell
+   .venv\Scripts\activate
+   ```
+
+4. Install the dependencies:
+
    ```bash
    pip install -r requirements.txt
    ```
 
-## Running the Application
+### ▶️ Running the Application
+
+Start the application with:
 
 ```bash
 python run.py
 ```
 
-The application will be available at `http://localhost:5000`
+By default, the application is available at:
 
-## Running Tests
+```text
+http://127.0.0.1:5000
+```
+
+The SQLite database is initialized automatically by the application.
+
+## 🧪 Automated Tests
+
+TaskFlow uses **Pytest** to verify application behavior and help prevent regressions.
+
+Run the complete test suite:
 
 ```bash
-# Run all tests with verbose output
 pytest -v
+```
 
-# Run with coverage (if coverage is installed)
+To generate a coverage report, install `pytest-cov` if it is not already included in the project dependencies:
+
+```bash
+pip install pytest-cov
 pytest --cov=src tests/
 ```
 
-## GitHub Actions (CI)
+### 📊 Test Coverage
 
-The CI pipeline runs automatically on:
-- Push to `main` branch
-- Pull requests to `main` branch
+The current test suite contains 25 tests covering the following areas:
 
-The workflow:
-1. Checks out the code
-2. Sets up Python 3.11
-3. Installs dependencies from `requirements.txt`
-4. Runs the test suite with Pytest
-5. Runs Ruff for code quality checks
+| Test Area | Number of Tests |
+|---|---:|
+| Task Creation | 4 |
+| Task Listing | 2 |
+| Task Viewing | 2 |
+| Task Editing | 5 |
+| Task Deletion | 2 |
+| Task Status Management | 3 |
+| Priority Persistence | 3 |
+| Database Operations | 4 |
+| **Total** | **25** |
 
-View workflow runs in the **Actions** tab on GitHub.
+## 🔄 Continuous Integration
 
-## Kanban Board
+The project uses **GitHub Actions** to automate quality checks whenever changes are pushed to the `main` branch or a pull request targets it.
 
-The project is managed using GitHub Projects with a Kanban board containing three columns:
-- **To Do** - Planned work
-- **In Progress** - Currently being worked on
-- **Done** - Completed work
+The workflow performs the following steps:
 
-The board contains at least 10 cards representing development tasks, including the scope change for priority management.
+1. 📦 Checks out the repository.
+2. 🐍 Sets up the Python environment.
+3. 📥 Installs project dependencies.
+4. 🧪 Executes automated tests using Pytest.
+5. 🔍 Runs Ruff to check code quality.
 
-## Scope Change: Task Priority
+Workflow execution results are available in the repository's **Actions** tab.
 
-**Original scope**: Tasks had only title, description, and status.
+## 📌 Agile Project Management
 
-**Change request**: Add priority field (Low/Medium/High) to help users identify critical tasks.
+TaskFlow development is organized using a Kanban board through GitHub Projects.
 
-**Implementation**:
-1. Created Kanban card for the change
-2. Added `priority` column to SQLite database with default value "Medium"
-3. Updated backend validation to accept only valid priorities
-4. Modified forms (create/edit) to include priority dropdown
-5. Added priority display in task list and detail views
-6. Created tests for priority functionality
-7. Updated documentation
+The board uses three workflow stages:
 
-This change was implemented as a real scope change with proper tracking and migration (existing tasks get default priority).
+- 📝 **To Do:** Tasks that have not started.
+- 🔄 **In Progress:** Tasks currently being developed.
+- ✅ **Done:** Completed tasks.
 
-## Commits
+The board contains at least 10 development cards, providing visibility into project progress, task organization, and scope management.
 
-The repository contains meaningful commits following Conventional Commits format:
-- `feat:` for new features
-- `fix:` for bug fixes
-- `docs:` for documentation
-- `test:` for tests
-- `ci:` for CI configuration
-- `chore:` for maintenance
+## 🔀 Scope Change: Task Priority
 
-## UML Diagrams
+An additional requirement was introduced during development to simulate a real-world scope change.
 
-Located in `docs/diagrams/`:
-- **Use Case Diagram** - Shows user interactions with the system
-- **Class Diagram** - Shows the database and service layer structure
+**Initial scope:** Tasks included a title, description, and status.
 
-## Theoretical Document
+**Change request:** Add a priority attribute to help users identify and organize tasks according to their importance.
 
-The academic report (PDF/DOCX) is in `docs/report/` and covers:
-- Project description and initial scope
-- Agile methodology applied
-- Importance of software modeling
-- UML diagrams with explanations
-- Scope change justification and impact
-- Automated testing explanation
-- GitHub evidence (Kanban, commits, Actions)
+**Implementation:**
 
-## Limitations
+1. 🗂️ Registered the change as a new Kanban card.
+2. 🗄️ Added a `priority` field to the SQLite database.
+3. 🎯 Defined the accepted priority levels: `Low`, `Medium`, and `High`.
+4. 🛡️ Implemented backend validation for priority values.
+5. ✏️ Updated task creation and editing forms.
+6. 📋 Added priority information to task listings and detail views.
+7. 🧪 Created automated tests to verify priority behavior.
+8. 📚 Updated the project documentation.
 
-- No authentication/authorization (academic scope)
-- Single-user design
-- No deployment configuration
-- Minimal frontend (focus on backend/engineering practices)
-- SQLite only (no PostgreSQL/MySQL support)
+Existing records are assigned a default priority of `Medium` to maintain compatibility with the database change.
 
-## License
+This change demonstrates how requirements can evolve during development and how version control, task tracking, and automated testing help manage those changes.
 
-This project is for academic purposes only.
+## 📐 UML Diagrams
 
-## Test Results
+The project's UML diagrams are available in `docs/diagrams/`:
 
-All tests passing (25/25):
+- 👤 **Use Case Diagram:** Represents the interactions between the user and the application.
+- 🏗️ **Class Diagram:** Represents the main structural elements of the system and their relationships.
 
-- Task Creation: 4 tests
-- Task Listing: 2 tests
-- Task Viewing: 2 tests
-- Task Editing: 5 tests
-- Task Deletion: 2 tests
-- Task Status Change: 3 tests
-- Priority Persistence: 3 tests
-- Database Operations: 4 tests
+These diagrams support the understanding of the system's requirements and structure.
 
-## Author
+## 📚 Academic Documentation
 
-Matheus Xavier - Software Engineering Student
+The theoretical report is available in `docs/report/` and covers:
+
+- Project description and initial scope.
+- Agile methodology and project organization.
+- The importance of software modeling.
+- UML diagrams and their relevance.
+- Scope change justification and impact.
+- Automated testing and continuous integration.
+- Evidence of project management and development activities.
+
+## ⚠️ Limitations
+
+TaskFlow was intentionally designed with a limited scope to meet the academic requirements.
+
+Current limitations include:
+
+- No user authentication or authorization.
+- Single-user application.
+- No production deployment configuration.
+- Minimal frontend, focused on application functionality.
+- SQLite as the only supported database.
+
+## 📄 License
+
+This project was developed for academic purposes as part of a Software Engineering assignment.
+
+## 👨‍💻 Author
+
+**Matheus Xavier**
+
+Computer Science Student
