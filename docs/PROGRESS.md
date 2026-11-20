@@ -1,198 +1,182 @@
-# TaskFlow - Progress Report
+# TaskFlow — Project Progress
 
-## Project Overview
-TaskFlow - A web-based task management system for academic Software Engineering project.
+**Last reviewed:** 2026-11-20
+**Repository:** https://github.com/mxavier-dev/taskflow
+**Default branch:** `main`
 
----
+## 1. Project Overview
 
-## Current Stage: Etapa 4 - Testes (Completed)
+TaskFlow is a web-based task management application developed with Python, Flask, and SQLite for the Software Engineering assignment **“Building an Agile Project on GitHub: From Management to Quality Control.”**
 
----
+The application provides CRUD operations for tasks, status management, backend validation, and task priority.
 
-## Requirements Status
+## 2. Repository Audit Snapshot
 
-| Requirement | Status | Evidence |
-|-------------|--------|----------|
-| Flask inicia corretamente | ✅ Concluído e verificado | Application runs at http://localhost:5000 |
-| SQLite persiste os dados | ✅ Concluído e verificado | Database operations tested and working |
-| CRUD completo funciona | ✅ Concluído e verificado | All 25 tests pass |
-| Estados são validados | ✅ Concluído e verificado | Backend validation for status/priority |
-| Prioridade Low/Medium/High funciona | ✅ Concluído e verificado | Priority field implemented and tested |
-| Testes automatizados passam | ✅ Concluído e verificado | 27/27 tests passing |
-| GitHub Actions executa os testes | ⏳ Pendente | Workflow file created, needs push to GitHub |
-| Kanban tem 10+ cartões e 3 colunas | ⏳ Pendente | Requires GitHub Projects setup |
-| 10+ commits reais e significativos | ✅ Concluído e verificado | 10 commits (including initial) |
-| Mudança de escopo documentada | ✅ Concluído e verificado | README documents priority change |
-| README permite instalar e executar | ✅ Concluído e verificado | Complete README.md created |
-| UML corresponde à solução | ⏳ Pendente | Diagrams to be created |
-| Documento teórico atende aos tópicos | ⏳ Pendente | PDF/DOCX to be created |
-| Capturas são reais e suficientes | ⏳ Pendente | Screenshots to be taken |
-| Roteiro do vídeo cabe em 4 min | ⏳ Pendente | Script prepared in README |
+The following information was checked against the public repository on November 20, 2026:
 
----
+| Item | Observed state | Evidence / Notes |
+|---|---|---|
+| Repository visibility | ✅ Public | GitHub repository metadata |
+| Default branch | ✅ `main` | Repository metadata |
+| Commits | ✅ 12 | Commit history |
+| Issues | ✅ 13 | Includes Issue #13 for task priority |
+| GitHub Projects | ⚠️ Partially verified | User-provided screenshot showed 12 cards, all in Done |
+| Kanban columns | ⚠️ Present in screenshot | To Do, In Progress, Done; no cards shown in the first two columns |
+| Automated test functions | ✅ 27 in source | Counted `def test_*` in `tests/test_tasks.py` |
+| Latest observed Actions run | ✅ Success | Run from 2026-11-15, commit `17a1268` |
+| UML source files | ⚠️ Present, need review | `class.puml` and `use_case.puml` |
+| Academic report | ⏳ Not found | No report file/directory in current repository tree |
+| Evidence screenshots | ⏳ Not found | No screenshots directory/files in current repository tree |
+| Presentation video | ⏳ Pending | Must be recorded and shared separately |
 
-## Completed Work
+**Audit limitation:** the GitHub connector can inspect repository files, Issues, commits, and Actions, but it cannot inspect the GitHub Projects board directly. The Kanban assessment above is based on the screenshot supplied by the project owner.
 
-### Etapa 1 - Inspeção ✅
-- Inspected existing codebase and environment
-- Identified existing files: app.py, init_db.py, requirements.txt, templates
-- Created comprehensive project plan
+## 3. Application Implementation
 
-### Etapa 2 - Estrutura e Persistência ✅
-- Created `src/` directory structure with modular components
-- Implemented `src/database.py` with full CRUD operations
-- Added database initialization with `created_at` and `priority` columns
-- Implemented migration for existing database (added `created_at` column)
+### Completed features
 
-### Etapa 3 - CRUD ✅
-- Implemented all routes in `src/routes.py`:
-  - GET `/tasks` - List all tasks
-  - GET `/tasks/<id>` - View single task
-  - GET/POST `/tasks/create` - Create task
-  - GET/POST `/tasks/<id>/edit` - Edit task
-  - POST `/tasks/<id>/delete` - Delete task
-  - POST `/tasks/<id>/status` - Change status
-- Backend validation for all inputs (title required, valid status, valid priority)
-- Proper error handling (404 for non-existent tasks)
+- [x] Flask application factory in `src/app.py`.
+- [x] SQLite connection management and database initialization.
+- [x] Task creation.
+- [x] Task listing.
+- [x] Individual task details.
+- [x] Task editing.
+- [x] Task deletion.
+- [x] Status management: `Pending`, `In Progress`, `Completed`.
+- [x] Priority management: `Low`, `Medium`, `High`.
+- [x] Backend validation for title, status, and priority.
+- [x] Default priority of `Medium`.
+- [x] Database migration to add the priority column to existing databases.
+- [x] Migration of legacy Portuguese status values to English.
+- [x] Parameterized SQL queries.
+- [x] Pytest fixtures using an isolated test database.
 
-### Etapa 4 - Testes ✅
-- Configured Pytest with fixtures in `tests/conftest.py`
-- Created 27 comprehensive test cases in `tests/test_tasks.py`:
-  - Task creation (valid, invalid title, invalid priority, default priority)
-  - Task listing (empty, with data)
-  - Task viewing (existing, non-existent 404)
-  - Task editing (valid, invalid title, invalid status, invalid priority, 404)
-  - Task deletion (existing, non-existent 404)
-  - Status changes (valid, invalid, 404)
-  - Priority persistence (creation, edit, display)
-  - Direct database operations
-  - Validation functions (status, priority)
-- All 27 tests passing
-- Linting with Ruff: clean (0 issues)
+### Application entry point
 
-### Etapa 5 - Integração Contínua ✅ (code ready)
-- Created GitHub Actions workflow (`.github/workflows/tests.yml`)
-- Runs on push and pull_request to main
-- Installs dependencies, runs tests, runs Ruff linting
-- Ready to verify on GitHub after push
+Run the application from the repository root with:
 
----
-
-## Files Created/Modified
-
-### New Files
-- `src/__init__.py` - Package initialization
-- `src/database.py` - Database operations (CRUD, connection management)
-- `src/routes.py` - Flask route handlers with validation
-- `src/app.py` - Flask application factory
-- `run.py` - Application entry point
-- `templates/base.html` - Base template with navigation
-- `templates/tasks.html` - Task list view
-- `templates/create_task.html` - Create task form (updated)
-- `templates/edit_task.html` - Edit task form
-- `templates/view_task.html` - Task detail view
-- `static/css/style.css` - Minimal styling
-- `tests/conftest.py` - Pytest fixtures
-- `tests/test_tasks.py` - 25 test cases
-- `.github/workflows/tests.yml` - GitHub Actions CI workflow
-- `docs/PROGRESS.md` - This file
-
-### Modified Files
-- `README.md` - Complete documentation
-- `requirements.txt` - Verified dependencies
-- `database/taskflow.db` - Migrated schema (added `created_at`, `priority`)
-
----
-
-## Technical Decisions
-
-1. **Modular structure**: Separated database, routes, and app factory for maintainability
-2. **Blueprint pattern**: Used Flask Blueprint for route organization
-3. **Context managers**: Database connections use context managers for safety
-4. **Parameterized queries**: All SQL uses `?` placeholders to prevent injection
-5. **Backend validation**: All validation done server-side, not relying on HTML5
-6. **Test isolation**: Each test uses a temporary database via fixtures
-7. **Conventional commits**: Will follow `feat:`, `fix:`, `docs:`, `test:`, `ci:`, `chore:` prefixes
-
----
-
-## Scope Change: Priority Field
-
-**Implemented as simulated scope change:**
-- Added `priority` column to database (Low/Medium/High, default: Medium)
-- Updated create/edit forms with priority dropdown
-- Added priority display in list and detail views
-- Backend validation for valid priorities
-- Tests covering priority functionality
-- Documented in README.md with justification
-
----
-
-## Blockers / Pending External Actions
-
-1. **GitHub Repository**: Need to push to GitHub and configure:
-   - Public repository
-   - GitHub Projects (Kanban board with 10+ cards, 3 columns)
-   - GitHub Actions (verify workflow runs)
-2. **UML Diagrams**: Create Use Case and Class diagrams in `docs/diagrams/`
-3. **Theoretical Document**: Produce PDF/DOCX in `docs/report/`
-4. **Screenshots**: Capture Kanban, commits, Actions, running app
-5. **Video Pitch**: Record 4-minute presentation
-
----
-
-## Next Actions
-
-1. Initialize Git repository (if not already) and commit all changes
-2. Push to GitHub
-3. Configure GitHub Projects Kanban board
-4. Verify GitHub Actions workflow execution
-5. Create UML diagrams
-6. Write theoretical document
-7. Take screenshots for evidence
-8. Prepare video recording environment
-
----
-
-## Test Results Summary
-
-```
-============================= test session starts ==============================
-platform linux -- Python 3.10.12, pytest-9.2.0, pluggy-1.7.0
-rootdir: /media/matheus/Kingston/Programação/taskflow
-collected 27 items
-
-tests/test_tasks.py::TestTaskCreation::test_create_valid_task PASSED
-tests/test_tasks.py::TestTaskCreation::test_create_task_without_title_fails PASSED
-tests/test_tasks.py::TestTaskCreation::test_create_task_with_invalid_priority_fails PASSED
-tests/test_tasks.py::TestTaskCreation::test_create_task_default_priority PASSED
-tests/test_tasks.py::TestTaskListing::test_list_tasks_empty PASSED
-tests/test_tasks.py::TestTaskListing::test_list_tasks_with_data PASSED
-tests/test_tasks.py::TestTaskViewing::test_view_existing_task PASSED
-tests/test_tasks.py::TestTaskViewing::test_view_nonexistent_task_returns_404 PASSED
-tests/test_tasks.py::TestTaskEditing::test_edit_valid_task PASSED
-tests/test_tasks.py::TestTaskEditing::test_edit_task_without_title_fails PASSED
-tests/test_tasks.py::TestTaskEditing::test_edit_task_with_invalid_status_fails PASSED
-tests/test_tasks.py::TestTaskEditing::test_edit_task_with_invalid_priority_fails PASSED
-tests/test_tasks.py::TestTaskEditing::test_edit_nonexistent_task_returns_404 PASSED
-tests/test_tasks.py::TestTaskDeletion::test_delete_existing_task PASSED
-tests/test_tasks.py::TestTaskDeletion::test_delete_nonexistent_task_returns_404 PASSED
-tests/test_tasks.py::TestTaskStatusChange::test_change_status_valid PASSED
-tests/test_tasks.py::TestTaskStatusChange::test_change_status_invalid_fails PASSED
-tests/test_tasks.py::TestTaskStatusChange::test_change_status_nonexistent_task_returns_404 PASSED
-tests/test_tasks.py::TestPriorityPersistence::test_priority_saved_on_creation PASSED
-tests/test_tasks.py::TestPriorityPersistence::test_priority_saved_on_edit PASSED
-tests/test_tasks.py::TestPriorityPersistence::test_priority_displayed_in_list PASSED
-tests/test_tasks.py::TestDatabaseOperations::test_create_and_retrieve_task PASSED
-tests/test_tasks.py::TestDatabaseOperations::test_update_task PASSED
-tests/test_tasks.py::TestDatabaseOperations::test_delete_task PASSED
-tests/test_tasks.py::TestDatabaseOperations::test_update_status PASSED
-tests/test_tasks.py::TestValidationFunctions::test_is_valid_status PASSED
-tests/test_tasks.py::TestValidationFunctions::test_is_valid_priority PASSED
-
-============================== 27 passed in 0.45s ==============================
+```bash
+python -m src.app
 ```
 
----
+The previous README referenced `python run.py`, but no `run.py` file exists in the current repository tree. The README has been corrected to use the available entry point.
 
-*Last updated: 2026-11-14*
+## 4. Automated Testing and CI
+
+### Test inventory
+
+The current `tests/test_tasks.py` file contains 27 test functions:
+
+| Test area | Count |
+|---|---:|
+| Task creation | 4 |
+| Task listing | 2 |
+| Task viewing | 2 |
+| Task editing | 5 |
+| Task deletion | 2 |
+| Status management | 3 |
+| Priority persistence/display | 3 |
+| Database operations | 4 |
+| Validation functions | 2 |
+| **Total** | **27** |
+
+Run locally with:
+
+```bash
+pytest -v
+```
+
+### GitHub Actions
+
+- [x] Workflow file exists: `.github/workflows/tests.yml`.
+- [x] Triggered on pushes to `main`.
+- [x] Triggered on pull requests targeting `main`.
+- [x] Sets up Python 3.11.
+- [x] Installs `requirements.txt`.
+- [x] Runs Pytest.
+- [x] Installs Ruff and runs `ruff check .`.
+- [x] Latest observed run (November 15, 2026) completed with conclusion `success`.
+
+The successful run predates the current documentation update. A new run should be checked after these documentation changes are pushed.
+
+## 5. Scope Change — Task Priority
+
+The initial scope covered task title, description, and status. Priority was introduced during development as a simulated scope change.
+
+Implemented behavior:
+
+- [x] Added the `priority` field to the SQLite task model.
+- [x] Added the values `Low`, `Medium`, and `High`.
+- [x] Set `Medium` as the default priority.
+- [x] Added backend validation.
+- [x] Added priority selection to task creation and editing forms.
+- [x] Displayed priority in the task list and detail view.
+- [x] Added automated tests for priority behavior.
+
+Tracking:
+
+- [x] Issue #13 exists: [adicionar prioridade às tarefas (Low, Medium e High)](https://github.com/mxavier-dev/taskflow/issues/13).
+- [ ] Add a description explaining the reason for the change.
+- [ ] Add acceptance criteria to Issue #13.
+- [ ] Confirm that Issue #13 is represented in the GitHub Projects board.
+
+**Audit note:** Issue #13 was closed, but its body was empty during the review. The code implements the feature, but the Issue itself needs descriptive content to provide adequate evidence of scope management.
+
+## 6. Agile Project Management
+
+- [x] GitHub Projects board created.
+- [x] Three columns were visible in the supplied screenshot: To Do, In Progress, and Done.
+- [x] At least 10 cards: 12 were visible in the screenshot.
+- [ ] Review the distribution of cards based on the actual state of each task.
+- [ ] Confirm Issue #13 is linked to the project board.
+
+The screenshot showed all 12 cards in Done. This is not automatically incorrect if every represented activity is complete, but the board does not show work moving through the three stages. Do not move cards artificially just to fill columns.
+
+## 7. UML and Modeling
+
+Files present:
+
+- [x] `docs/diagrams/use_case.puml`
+- [x] `docs/diagrams/class.puml`
+
+Pending review:
+
+- [ ] Revise the class diagram to match the actual architecture.
+- [ ] Check consistency between the use case diagram and implemented features.
+- [ ] Render the PlantUML files as PNG or SVG for inclusion in the academic report.
+
+**Identified mismatch:** the class diagram represents FlaskApp, Database, Routes, and templates as classes. In the code, the application is organized around modules/functions, a Flask application factory, a Blueprint, and Jinja templates. The current class diagram should not be treated as final until corrected.
+
+## 8. Academic Deliverables
+
+| Deliverable | Status |
+|---|---|
+| Public GitHub repository | ✅ Complete |
+| Application with CRUD | ✅ Implemented |
+| Scope change implemented | ✅ Implemented |
+| GitHub Issues and commits | ✅ Present |
+| GitHub Projects board with 10+ cards | ⚠️ Screenshot confirms 12; all in Done |
+| GitHub Actions workflow | ✅ Configured; latest observed run succeeded |
+| Automated tests | ✅ 27 test functions in source |
+| Use case diagram | ⚠️ Source exists; review/render pending |
+| Class diagram | ⚠️ Source exists; revision/render pending |
+| Theoretical report (PDF/DOCX) | ⏳ Pending |
+| Evidence screenshots | ⏳ Pending |
+| Video pitch (up to 4 minutes) | ⏳ Pending |
+
+## 9. Next Actions — Recommended Order
+
+1. **Complete Issue #13:** add the change rationale and acceptance criteria; verify its association with the project board.
+2. **Correct the class diagram:** represent the real Flask modules, application factory, Blueprint/routes, database operations, and templates accurately.
+3. **Render both UML diagrams:** export PNG or SVG versions for the report.
+4. **Capture evidence:** Kanban board, commit history, Issues, successful Actions run, and application screens.
+5. **Write the theoretical report:** project scope, agile method, modeling, UML, scope change, testing/CI, results, and evidence.
+6. **Record the video pitch:** up to four minutes, demonstrating the application and explaining the workflow and scope change.
+7. **Run tests and CI again:** confirm the final repository state after all changes are committed.
+
+## 10. Audit and Documentation Notes
+
+- The previous README stated 25 tests; the source contains 27 test functions. The count has been corrected.
+- The previous progress file contained obsolete statements that GitHub Actions, the Kanban board, and UML files were still pending. Those statements have been replaced with the observed state.
+- The previous README instructed users to run `python run.py`; the current repository does not contain that file. The command has been corrected to `python -m src.app`.
+- The README and this progress report describe repository state as observed on November 20, 2026. Recheck the GitHub Actions status and project board after subsequent changes.

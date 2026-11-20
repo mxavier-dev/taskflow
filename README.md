@@ -1,86 +1,87 @@
 # 🚀 TaskFlow
 
-A lightweight task management web application developed with Python and Flask as part of an academic Software Engineering project. The project focuses on agile development practices, software quality, automated testing, and continuous integration.
+A lightweight task management web application built with Python and Flask for an academic Software Engineering project. The project demonstrates CRUD development, agile project organization, automated testing, and continuous integration.
 
 ## 📌 Overview
 
-TaskFlow is a web-based application that allows users to manage tasks through complete CRUD operations (Create, Read, Update, and Delete).
+TaskFlow allows users to create, view, update, and delete tasks. Each task has a title, an optional description, a status, a priority, and a creation timestamp.
 
-The application uses SQLite for data persistence and Flask to handle application logic and HTTP requests. Its development follows an agile workflow supported by GitHub Projects, automated testing, and GitHub Actions.
+The application uses Flask for its web layer and SQLite for persistence. The project is managed with Git and GitHub, with a Kanban board in GitHub Projects and automated quality checks through GitHub Actions.
 
-This project was developed for the academic assignment **"Building an Agile Project on GitHub: From Management to Quality Control."**
+**Academic assignment:** *Building an Agile Project on GitHub: From Management to Quality Control.*
 
 ## ✨ Features
 
-- 📝 **Task creation:** Create tasks with a title, description, and priority.
-- 📋 **Task listing:** View all registered tasks, including their current status and priority.
-- 🔎 **Task details:** Access complete information about an individual task.
-- ✏️ **Task editing:** Update task information, status, and priority.
-- 🗑️ **Task deletion:** Remove tasks with confirmation.
-- 🔄 **Status management:** Track tasks through three statuses: Pending, In Progress, and Completed.
-- 🛡️ **Input validation:** Validate user input on the backend.
-- 💾 **Data persistence:** Store task information using SQLite.
-- 🎯 **Priority management:** Classify tasks as Low, Medium, or High.
+- 📝 Create tasks with a title, description, and priority.
+- 📋 List all tasks, including status and priority.
+- 🔎 View an individual task and its details.
+- ✏️ Edit task information, status, and priority.
+- 🗑️ Delete tasks with a confirmation prompt.
+- 🔄 Track task status: `Pending`, `In Progress`, and `Completed`.
+- 🎯 Set task priority: `Low`, `Medium`, or `High`.
+- 🛡️ Validate required fields and allowed status/priority values on the backend.
+- 💾 Persist task data in SQLite.
+- 🔧 Migrate legacy status values and add the priority column to existing databases.
 
 ## 🛠️ Technologies
 
 | Component | Technology |
 |---|---|
-| 🐍 Programming Language | Python 3.11+ |
-| ⚙️ Backend Framework | Flask 3.x |
-| 🗄️ Database | SQLite |
-| 🎨 Frontend | HTML5 and CSS3 |
-| 🧪 Automated Testing | Pytest |
-| 🔁 Continuous Integration | GitHub Actions |
-| 🔍 Code Quality | Ruff |
-| 🌐 Version Control | Git and GitHub |
+| Programming Language | Python 3.11+ |
+| Web Framework | Flask 3.1 |
+| Database | SQLite |
+| Frontend | HTML5, CSS3, Jinja |
+| Automated Tests | Pytest |
+| Continuous Integration | GitHub Actions |
+| Linting | Ruff |
+| Version Control | Git and GitHub |
 
 ## 📁 Project Structure
 
 ```text
 taskflow/
-├── run.py
-├── requirements.txt
-├── README.md
-├── .gitignore
+├── .github/
+│   └── workflows/
+│       └── tests.yml
+├── docs/
+│   ├── PROGRESS.md
+│   └── diagrams/
+│       ├── class.puml
+│       └── use_case.puml
 ├── src/
 │   ├── __init__.py
 │   ├── app.py
 │   ├── database.py
 │   └── routes.py
-├── templates/
-│   ├── base.html
-│   ├── tasks.html
-│   ├── create_task.html
-│   ├── edit_task.html
-│   └── view_task.html
 ├── static/
 │   └── css/
 │       └── style.css
+├── templates/
+│   ├── base.html
+│   ├── create_task.html
+│   ├── edit_task.html
+│   ├── tasks.html
+│   └── view_task.html
 ├── tests/
 │   ├── conftest.py
 │   └── test_tasks.py
-├── docs/
-│   ├── PROGRESS.md
-│   ├── diagrams/
-│   ├── screenshots/
-│   └── report/
-└── .github/
-    └── workflows/
-        └── tests.yml
+├── .gitignore
+├── LICENSE
+├── README.md
+└── requirements.txt
 ```
+
+The SQLite database file is created automatically under `database/taskflow.db` when the application initializes. The directory/database file is generated at runtime and is not part of the tracked source tree.
 
 ## ⚡ Getting Started
 
-### 📋 Prerequisites
-
-Make sure the following tools are installed:
+### Prerequisites
 
 - Python 3.11 or higher
 - pip
 - Git
 
-### 📥 Installation
+### Installation
 
 1. Clone the repository:
 
@@ -89,167 +90,138 @@ Make sure the following tools are installed:
    cd taskflow
    ```
 
-2. Create a virtual environment:
-
-   ```bash
-   python -m venv .venv
-   ```
-
-3. Activate the virtual environment:
+2. Create and activate a virtual environment:
 
    **Linux/macOS**
    ```bash
+   python3 -m venv .venv
    source .venv/bin/activate
    ```
 
-   **Windows**
+   **Windows PowerShell**
    ```powershell
-   .venv\Scripts\activate
+   py -m venv .venv
+   .venv\Scripts\Activate.ps1
    ```
 
-4. Install the dependencies:
+3. Install dependencies:
 
    ```bash
-   pip install -r requirements.txt
+   python -m pip install -r requirements.txt
    ```
 
-### ▶️ Running the Application
+### Run the application
 
-Start the application with:
+From the repository root, run:
 
 ```bash
-python run.py
+python -m src.app
 ```
 
-By default, the application is available at:
+Then open http://127.0.0.1:5000 in your browser.
 
-```text
-http://127.0.0.1:5000
-```
-
-The SQLite database is initialized automatically by the application.
+The application initializes the SQLite database when the Flask app is created. The built-in development server is intended for local academic use, not production deployment.
 
 ## 🧪 Automated Tests
 
-TaskFlow uses **Pytest** to verify application behavior and help prevent regressions.
-
-Run the complete test suite:
+Run the test suite from the repository root:
 
 ```bash
 pytest -v
 ```
 
-To generate a coverage report, install `pytest-cov` if it is not already included in the project dependencies:
+The current test file contains **27 test functions**. The tests cover:
 
-```bash
-pip install pytest-cov
-pytest --cov=src tests/
-```
-
-### 📊 Test Coverage
-
-The current test suite contains 25 tests covering the following areas:
-
-| Test Area | Number of Tests |
+| Test Area | Tests |
 |---|---:|
-| Task Creation | 4 |
-| Task Listing | 2 |
-| Task Viewing | 2 |
-| Task Editing | 5 |
-| Task Deletion | 2 |
-| Task Status Management | 3 |
-| Priority Persistence | 3 |
-| Database Operations | 4 |
-| **Total** | **25** |
+| Task creation | 4 |
+| Task listing | 2 |
+| Task viewing | 2 |
+| Task editing | 5 |
+| Task deletion | 2 |
+| Status management | 3 |
+| Priority persistence and display | 3 |
+| Database operations | 4 |
+| Validation functions | 2 |
+| **Total** | **27** |
+
+These are test cases present in the repository. Test execution results should be checked in the local test run or the corresponding GitHub Actions run.
 
 ## 🔄 Continuous Integration
 
-The project uses **GitHub Actions** to automate quality checks whenever changes are pushed to the `main` branch or a pull request targets it.
+The workflow at `.github/workflows/tests.yml` is configured to run on pushes to `main` and pull requests targeting `main`.
 
-The workflow performs the following steps:
+It performs the following steps:
 
-1. 📦 Checks out the repository.
-2. 🐍 Sets up the Python environment.
-3. 📥 Installs project dependencies.
-4. 🧪 Executes automated tests using Pytest.
-5. 🔍 Runs Ruff to check code quality.
+1. Checks out the repository.
+2. Sets up Python 3.11.
+3. Installs dependencies from `requirements.txt`.
+4. Runs `pytest -v`.
+5. Installs Ruff and runs `ruff check .`.
 
-Workflow execution results are available in the repository's **Actions** tab.
+The latest workflow run visible during the repository review (November 15, 2026) completed successfully. Check the repository's Actions tab for the status of newer runs.
 
 ## 📌 Agile Project Management
 
-TaskFlow development is organized using a Kanban board through GitHub Projects.
+Project activities are tracked through GitHub Issues and a GitHub Projects Kanban board.
 
-The board uses three workflow stages:
+The board has three workflow columns:
 
-- 📝 **To Do:** Tasks that have not started.
-- 🔄 **In Progress:** Tasks currently being developed.
-- ✅ **Done:** Completed tasks.
+- **To Do:** work that has not started.
+- **In Progress:** work currently being performed.
+- **Done:** completed work.
 
-The board contains at least 10 development cards, providing visibility into project progress, task organization, and scope management.
+The board screenshot reviewed during the latest audit showed 12 cards, all in **Done**. The board therefore contains more than the required 10 cards, but the screenshot does not demonstrate work distributed across the three stages. Cards should reflect the actual state of work rather than being moved only to populate columns.
+
+The repository had 12 commits and 13 Issues at the time of this review. The project board and issue history provide traceability for planning and development activities.
 
 ## 🔀 Scope Change: Task Priority
 
-An additional requirement was introduced during development to simulate a real-world scope change.
+The initial task model focused on title, description, and status. During development, task priority was added as a scope change to make it possible to distinguish tasks by importance.
 
-**Initial scope:** Tasks included a title, description, and status.
+The implemented priority values are:
 
-**Change request:** Add a priority attribute to help users identify and organize tasks according to their importance.
+- `Low`
+- `Medium`
+- `High`
 
-**Implementation:**
+The change is implemented across the database, backend validation, task creation/editing forms, task list, and task detail view. New tasks default to `Medium`, and the database initialization routine adds the priority column to existing databases when necessary.
 
-1. 🗂️ Registered the change as a new Kanban card.
-2. 🗄️ Added a `priority` field to the SQLite database.
-3. 🎯 Defined the accepted priority levels: `Low`, `Medium`, and `High`.
-4. 🛡️ Implemented backend validation for priority values.
-5. ✏️ Updated task creation and editing forms.
-6. 📋 Added priority information to task listings and detail views.
-7. 🧪 Created automated tests to verify priority behavior.
-8. 📚 Updated the project documentation.
-
-Existing records are assigned a default priority of `Medium` to maintain compatibility with the database change.
-
-This change demonstrates how requirements can evolve during development and how version control, task tracking, and automated testing help manage those changes.
+The change is tracked in [Issue #13](https://github.com/mxavier-dev/taskflow/issues/13). **Note:** at the time of this review, the Issue was closed but had no description. Add the change rationale and acceptance criteria to the Issue so it serves as complete project-management evidence.
 
 ## 📐 UML Diagrams
 
-The project's UML diagrams are available in `docs/diagrams/`:
+PlantUML source files are stored in `docs/diagrams/`:
 
-- 👤 **Use Case Diagram:** Represents the interactions between the user and the application.
-- 🏗️ **Class Diagram:** Represents the main structural elements of the system and their relationships.
+- `use_case.puml` — user interactions with the application.
+- `class.puml` — intended structural representation.
 
-These diagrams support the understanding of the system's requirements and structure.
+**Documentation limitation:** the class diagram currently models `FlaskApp`, `Database`, `Routes`, and templates as classes. The implementation uses a Flask application factory, Python modules/functions, a Blueprint, and Jinja templates. The class diagram must be revised to accurately represent the implemented architecture before it is used as final academic evidence.
 
-## 📚 Academic Documentation
+The diagrams are currently available as PlantUML source; rendered image exports should be added if required by the report.
 
-The theoretical report is available in `docs/report/` and covers:
+## 📚 Academic Deliverables
 
-- Project description and initial scope.
-- Agile methodology and project organization.
-- The importance of software modeling.
-- UML diagrams and their relevance.
-- Scope change justification and impact.
-- Automated testing and continuous integration.
-- Evidence of project management and development activities.
+The repository currently contains the PlantUML source diagrams and this progress report. The following deliverables were not present in the repository during the latest review and remain to be completed:
+
+- Theoretical report in PDF or DOCX.
+- Screenshots of the Kanban board, commit history, successful Actions run, and running application.
+- Final video presentation (up to four minutes).
 
 ## ⚠️ Limitations
 
-TaskFlow was intentionally designed with a limited scope to meet the academic requirements.
-
-Current limitations include:
-
 - No user authentication or authorization.
-- Single-user application.
+- Designed as a small, single-user academic application.
 - No production deployment configuration.
-- Minimal frontend, focused on application functionality.
-- SQLite as the only supported database.
+- Minimal frontend focused on core functionality.
+- SQLite is the only supported database.
+- The Flask development server and fallback development secret key are not suitable for production.
 
 ## 📄 License
 
-This project was developed for academic purposes as part of a Software Engineering assignment.
+This project is distributed under the [MIT License](LICENSE).
 
 ## 👨‍💻 Author
 
 **Matheus Xavier**
-
 Computer Science Student
