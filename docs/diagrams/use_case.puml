@@ -1,11 +1,10 @@
 @startuml
-!define RECTANGLE class
 
 left to right direction
 
 actor "Usuário" as User
 
-package "TaskFlow" {
+rectangle "TaskFlow" {
     usecase "Criar tarefa" as UC1
     usecase "Listar tarefas" as UC2
     usecase "Consultar tarefa" as UC3
@@ -29,12 +28,20 @@ note right of UC1
 end note
 
 note right of UC6
-  Estados: Pendente, Em andamento, Concluída
+  Estados:
+  Pending
+  In Progress
+  Completed
 end note
 
 note right of UC7
-  Prioridades: Baixa, Média, Alta
-  Adicionado via mudança de escopo
+  Prioridades:
+  Low
+  Medium
+  High
+
+  Funcionalidade adicionada
+  durante a mudança de escopo.
 end note
 
 @enduml
